@@ -9,7 +9,6 @@ public class StudentList {
             System.err.println("Exiting program.");
             System.exit(1);
         }
-//		Check arguments
         if (args[0].equals("a")) {
             System.out.println("Loading data ...");
             try {
