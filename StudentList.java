@@ -3,6 +3,17 @@ import java.text.*;
 import java.util.*;
 
 public class StudentList {
+
+    public static String getLineFromFile() throws Exception {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("students.txt")));
+        String line = bufferedReader.readLine();
+        return line;
+    }
+
+    public static BufferedWriter getFileBufferedWriter() throws Exception {
+        return new BufferedWriter(new FileWriter("students.txt", true));
+    }
+
     public static void main(String[] args) {
         if (args.length > 1 || args.length < 1){
             System.err.println("Invalid number of arguments.");
@@ -12,10 +23,7 @@ public class StudentList {
         if (args[0].equals("a")) {
             System.out.println("Loading data ...");
             try {
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String line = bufferedReader.readLine();
+                String line = getLineFromFile();
                 String students[] = line.split(", ");
                 for (String student : students) {
                     System.out.println(student);
@@ -26,10 +34,7 @@ public class StudentList {
         } else if (args[0].equals("r")) {
             System.out.println("Loading data ...");
             try {
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(
-                        new FileInputStream("students.txt")));
-                String line = bufferedReader.readLine();
+                String line = getLineFromFile();
                 String students[] = line.split(", ");
                 Random random = new Random();
                 int index = random.nextInt(students.length);
@@ -40,8 +45,7 @@ public class StudentList {
         } else if (args[0].contains("+")) {
             System.out.println("Loading data ...");
             try {
-                BufferedWriter bufferedWriter = new BufferedWriter(
-                        new FileWriter("students.txt", true));
+                BufferedWriter bufferedWriter = getFileBufferedWriter();
                 String newData = args[0].substring(1);
                 Date date = new Date();
                 String dateFormatPattern = "dd-mm-yyyy hh:mm:ss a";
@@ -56,10 +60,7 @@ public class StudentList {
         } else if (args[0].contains("?")) {
             System.out.println("Loading data ...");
             try {
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String line = bufferedReader.readLine();
+                String line = getLineFromFile();
                 String students[] = line.split(",");
                 boolean found = false;
                 String t = args[0].substring(1);
@@ -78,10 +79,7 @@ public class StudentList {
         } else if (args[0].contains("c")) {
             System.out.println("Loading data ...");
             try {
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String line = bufferedReader.readLine();
+                String line = getLineFromFile();
                 int wordCount = line.split(", ").length;
                 System.out.println(wordCount + " word(s) found");
             } catch (Exception e) {
